@@ -3,7 +3,6 @@
 namespace App\Repository;
 
 use App\Db\DataBase;
-use App\Entity\Entity;
 use App\Entity\Product;
 
 class ProductRepository

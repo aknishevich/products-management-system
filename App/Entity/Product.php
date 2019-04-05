@@ -10,7 +10,7 @@ class Product
     private $name;
     private $description;
     private $price;
-    private $attributes = [];
+    private $attributes;
 
     /**
      * Product constructor.
