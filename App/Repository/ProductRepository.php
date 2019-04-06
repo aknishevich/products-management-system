@@ -41,8 +41,14 @@ class ProductRepository
     {
         $this->find($condition, $parameters);
         $productsList = [];
+        $attrValueRepository = new AttributeValueRepository;
         foreach ($this->products as $product) {
-            $productsList[] = new Product($product['name'], $product['description'], $product['price'], '', $product['id']);
+            $attrArray = explode(',', trim($product['attributes']));
+            $attributes = [];
+            foreach ($attrArray as $attr) {
+                $attributes[] = $attrValueRepository->getAttributesValue($attr);
+            }
+            $productsList[] = new Product($product['name'], $product['description'], $product['price'], $attributes, $product['id']);
         }
         return $productsList;
     }

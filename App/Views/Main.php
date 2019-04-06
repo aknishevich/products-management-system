@@ -27,11 +27,28 @@
         ?>
         <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
             <h4><a href="/product?id=<?= $product->getId(); ?>"><?= $product->getName(); ?></a></h4>
+            <?php
+            $attributes = $product->getAttributes();
+            foreach ($attributes as $attribute) {
+                if (!empty($attribute)) {
+                    echo $attribute->getName() . ": " . $attribute->getValue();
+                    echo "<br>---------------------------<br>";
+                }
+            }
+            ?>
         </div>
         <?php
         endforeach;
         ?>
     </div>
 </div>
+
+<?php
+/*$productRepository = new \App\Repository\ProductRepository;
+$attrName = $attributes->getAttributesValue();
+foreach ($attrName as $item) {
+    echo $item->getName() . ": " . $item->getValue(). "<br>";
+}
+*/?>
 </body>
 </html>

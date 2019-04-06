@@ -17,10 +17,10 @@ class Product
      * @param string $name
      * @param string $description
      * @param int $price
-     * @param string $attributes
+     * @param array $attributes
      * @param int|null $id
      */
-    public function __construct(string $name, string $description, int $price, string $attributes = '', int $id = null)
+    public function __construct(string $name, string $description, int $price, array $attributes = [], int $id = null)
     {
         $this->id = $id;
         $this->name = $name;
@@ -54,9 +54,9 @@ class Product
     }
 
     /**
-     * @return string
+     * @return array
      */
-    public function getAttributes(): string
+    public function getAttributes(): array
     {
         return $this->attributes;
     }
