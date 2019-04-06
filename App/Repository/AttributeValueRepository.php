@@ -26,10 +26,9 @@ class AttributeValueRepository
             $this->attributesValue = $this->db->from('attributes')->select('*')->innerJoin('attributes_values ON attributes.id = attributes_values.parent');
         }
         foreach ($this->attributesValue as $value) {
-            if($attributeId !== null) {
+            if ($attributeId !== null) {
                 return $result[] = new AttributeValue($value['id'], $value['parent'], $value['name'], $value['value']);
-            }
-            else {
+            } else {
                 $result[] = new AttributeValue($value['id'], $value['parent'], $value['name'], $value['value']);
             }
         }

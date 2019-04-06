@@ -21,9 +21,19 @@
 <div class="container">
     <h1 class="text-center my-5">Add Product</h1>
     <form action="/addProduct" method="post">
-        <input required type="text" name="productName" value="" placeholder="Product name">
-        <input required type="text" name="productDescription" placeholder="Product description">
-        <input required type="text" name="productPrice" placeholder="Product price">
+        <div class="form-group">
+            <input required type="text" class="form-control" name="productName" value="" placeholder="Product name">
+        </div>
+        <div class="form-group">
+            <input required type="text" class="form-control" name="productDescription" placeholder="Product description">
+        </div>
+        <div class="form-group">
+            <input required type="text" class="form-control" name="productPrice" placeholder="Product price">
+        </div>
+        <div class="form-group">
+            <label for="productFile">Select photo for the file (optional)</label>
+            <input type="file" class="form-control" id="productFile" name="productFile">
+        </div>
         <input type="submit" name="productAdd" value="Add new Product">
     </form>
 </div>
