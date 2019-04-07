@@ -17,7 +17,13 @@ class AttributeNameRepository
         $this->db = DataBase::getDb();
     }
 
-    public function getAttributesName($condition = null, $parameters = null)
+    /**
+     * @param null $condition
+     * @param null $parameters
+     * @return array
+     * @throws \Envms\FluentPDO\Exception
+     */
+    public function getAttributesName($condition = null, $parameters = null): array
     {
         $result = [];
         if ($condition !== null && $parameters !== null) {

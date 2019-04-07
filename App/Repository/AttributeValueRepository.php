@@ -17,20 +17,19 @@ class AttributeValueRepository
         $this->db = DataBase::getDb();
     }
 
-    public function getAttributesValue($attributeId = null)
+    public function getAttributesValue($condition = null, $parameter = null)
     {
         $result = [];
-        if ($attributeId !== null) {
-            $this->attributesValue = $this->db->from('attributes')->select('*')->innerJoin('attributes_values ON attributes.id = attributes_values.parent')->where('attributes_values.id', $attributeId);
+        if ($condition !== null && $parameter !== null) {
+            $this->attributesValue = $this->db->from('attributes')->select('*')->innerJoin('attributes_values ON attributes.id = attributes_values.parent')->where('attributes_values.'.$condition, $parameter);
         } else {
             $this->attributesValue = $this->db->from('attributes')->select('*')->innerJoin('attributes_values ON attributes.id = attributes_values.parent');
         }
         foreach ($this->attributesValue as $value) {
-            if ($attributeId !== null) {
-                return $result[] = new AttributeValue($value['id'], $value['parent'], $value['name'], $value['value']);
-            } else {
-                $result[] = new AttributeValue($value['id'], $value['parent'], $value['name'], $value['value']);
+            if ($condition === 'id') {
+                return new AttributeValue($value['id'], $value['parent'], $value['name'], $value['value']);
             }
+            $result[] = new AttributeValue($value['id'], $value['parent'], $value['name'], $value['value']);
         }
         return $result;
     }

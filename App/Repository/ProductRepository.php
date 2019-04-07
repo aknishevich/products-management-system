@@ -26,7 +26,7 @@ class ProductRepository
      */
     public function create(Product $product)
     {
-        $values = array ('name' => $product->getName(), 'description' => $product->getDescription(), 'price' => $product->getPrice(), 'attributes' => $product->getAttributes());
+        $values = array('name' => $product->getName(), 'description' => $product->getDescription(), 'price' => $product->getPrice(), 'attributes' => $product->getAttributesAsString());
         $query = $this->db->insertInto('products')->values($values);
         return $query->execute();
     }
@@ -41,13 +41,8 @@ class ProductRepository
     {
         $this->find($condition, $parameters);
         $productsList = [];
-        $attrValueRepository = new AttributeValueRepository;
         foreach ($this->products as $product) {
-            $attrArray = explode(',', trim($product['attributes']));
-            $attributes = [];
-            foreach ($attrArray as $attr) {
-                $attributes[] = $attrValueRepository->getAttributesValue($attr);
-            }
+            $attributes = Product::attributesToArray($product['attributes']);
             $productsList[] = new Product($product['name'], $product['description'], $product['price'], $attributes, $product['id']);
         }
         return $productsList;
@@ -75,7 +70,7 @@ class ProductRepository
      */
     public function update(Product $product)
     {
-        $values = array('name' => $product->getName(), 'description' => $product->getDescription(), 'price' => $product->getPrice(), 'attributes' => $product->getAttributes());
+        $values = array('name' => $product->getName(), 'description' => $product->getDescription(), 'price' => $product->getPrice(), 'attributes' => $product->getAttributesAsString());
         return $this->db->update('products')->set($values)->where('id', $product->getId())->execute();
     }
 

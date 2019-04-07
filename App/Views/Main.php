@@ -14,29 +14,31 @@
             <li class="nav-item">
                 <a class="nav-link" href="/editProducts">Edit Products</a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/attributes">Attributes List</a>
+            </li>
         </ul>
     </div>
 </nav>
-<div class="container">
-    <h1 class="text-center" style="color: blue;">Home page</h1>
+<div class="container my-5">
+    <h1 class="text-center my-5">Products</h1>
     <div class="row">
         <?php
         $productRepository = new \App\Repository\ProductRepository();
         $products = $productRepository->getProducts();
         foreach ($products as $product):
         ?>
-        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-            <h4><a href="/product?id=<?= $product->getId(); ?>"><?= $product->getName(); ?></a></h4>
-            <?php
-            $attributes = $product->getAttributes();
-            foreach ($attributes as $attribute) {
-                if (!empty($attribute)) {
-                    echo $attribute->getName() . ": " . $attribute->getValue();
-                    echo "<br>---------------------------<br>";
-                }
-            }
-            ?>
-        </div>
+
+            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                <a href="/product?id=<?= $product->getId(); ?>">
+                    <h4><?= $product->getName(); ?></h4>
+                    <figure>
+                        <img style="width: 100%;" src="https://via.placeholder.com/200x150" alt="Here should be an image =(">
+                    </figure>
+                    <small>Here should have been an image = (</small>
+                </a>
+            </div>
+
         <?php
         endforeach;
         ?>
@@ -44,6 +46,9 @@
 </div>
 
 <?php
+
+var_dump(\Respect\Validation\Validator::notEmpty()->validate('21'));
+
 /*$productRepository = new \App\Repository\ProductRepository;
 $attrName = $attributes->getAttributesValue();
 foreach ($attrName as $item) {

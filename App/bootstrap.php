@@ -2,11 +2,11 @@
 
 require 'vendor/autoload.php';
 
-use App\Entity\Product;
 use \App\Repository\ProductRepository;
 use App\Db\DataBase;
 use \App\Controllers\AddProductController;
 use \App\Controllers\EditProductsController;
+use \App\Controllers\AttributesController;
 use \App\Controllers\MainController;
 use \App\Controllers\ProductController;
 
@@ -18,6 +18,7 @@ $dispatcher = FastRoute\simpleDispatcher(function(FastRoute\RouteCollector $r) {
     $r->addRoute('GET', '/editProducts', new EditProductsController);
     $r->addRoute('POST', '/editProducts', new EditProductsController);
     $r->addRoute('GET', '/product', new ProductController());
+    $r->addRoute('GET', '/attributes', new AttributesController());
     $r->addRoute('GET', '/', new MainController);
 });
 

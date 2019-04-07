@@ -7,6 +7,6 @@ class MainController extends Controller
 {
     public function __invoke(): void
     {
-        parent::createView('Main');
+        $this->createView('Main');
     }
 }
