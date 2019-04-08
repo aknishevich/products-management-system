@@ -1,8 +1,6 @@
 <?php
 
-
 namespace App\Entity;
-
 
 use App\Repository\AttributeValueRepository;
 
@@ -20,7 +18,7 @@ class Product
      * @param string $description
      * @param int $price
      * @param array $attributes
-     * @param int|null $id
+     * @param int $id
      */
     public function __construct(string $name, string $description, int $price, array $attributes = [], int $id = null)
     {
@@ -99,6 +97,5 @@ class Product
     {
         return $this->id;
     }
-
 
 }

@@ -1,8 +1,6 @@
 <?php
 
-
 namespace App\Repository;
-
 
 use App\Db\DataBase;
 use App\Entity\AttributeValue;
@@ -21,9 +19,16 @@ class AttributeValueRepository
     {
         $result = [];
         if ($condition !== null && $parameter !== null) {
-            $this->attributesValue = $this->db->from('attributes')->select('*')->innerJoin('attributes_values ON attributes.id = attributes_values.parent')->where('attributes_values.'.$condition, $parameter);
+            $this->attributesValue = $this->db
+                ->from('attributes')
+                ->select('*')
+                ->innerJoin('attributes_values ON attributes.id = attributes_values.parent')
+                ->where('attributes_values.' . $condition, $parameter);
         } else {
-            $this->attributesValue = $this->db->from('attributes')->select('*')->innerJoin('attributes_values ON attributes.id = attributes_values.parent');
+            $this->attributesValue = $this->db
+                ->from('attributes')
+                ->select('*')
+                ->innerJoin('attributes_values ON attributes.id = attributes_values.parent');
         }
         foreach ($this->attributesValue as $value) {
             if ($condition === 'id') {

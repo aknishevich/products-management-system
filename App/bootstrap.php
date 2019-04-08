@@ -11,8 +11,7 @@ use \App\Controllers\MainController;
 use \App\Controllers\ProductController;
 
 
-
-$dispatcher = FastRoute\simpleDispatcher(function(FastRoute\RouteCollector $r) {
+$dispatcher = FastRoute\simpleDispatcher(function (FastRoute\RouteCollector $r) {
     $r->addRoute('GET', '/addProduct', new AddProductController);
     $r->addRoute('POST', '/addProduct', new AddProductController);
     $r->addRoute('GET', '/editProducts', new EditProductsController);
@@ -55,13 +54,3 @@ switch ($routeInfo[0]) {
 
 $db = DataBase::getDb();
 $productRepository = new ProductRepository();
-/*$db->query("CREATE TABLE IF NOT EXISTS `products` (
-    `id` INTEGER PRIMARY KEY AUTOINCREMENT,
-    `name` VARCHAR NOT NULL,
-    `description` VARCHAR NOT NULL,
-    `price` FLOAT NOT NULL
-)");*/
-//$db->query("INSERT INTO `products` (`name`, `description`, `price`) VALUES ('Iphone', 'Iphone descr', 2019)");
-
-
-

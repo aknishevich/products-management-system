@@ -1,8 +1,6 @@
 <?php
 
-
 namespace App\Repository;
-
 
 use App\Db\DataBase;
 use App\Entity\AttributeName;
@@ -27,9 +25,14 @@ class AttributeNameRepository
     {
         $result = [];
         if ($condition !== null && $parameters !== null) {
-            $this->attributesName = $this->db->from('attributes')->select('*')->where($condition, $parameters);
+            $this->attributesName = $this->db
+                ->from('attributes')
+                ->select('*')
+                ->where($condition, $parameters);
         } else {
-            $this->attributesName = $this->db->from('attributes')->select('*');
+            $this->attributesName = $this->db
+                ->from('attributes')
+                ->select('*');
         }
         foreach ($this->attributesName as $name) {
             $result[] = new AttributeName($name['id'], $name['name']);

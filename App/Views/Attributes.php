@@ -2,24 +2,9 @@
 <title>Attributes</title>
 </head>
 <body>
-<nav class="navbar navbar-expand-md navbar-dark bg-dark">
-    <div class="collapse navbar-collapse" id="navbarCollapse">
-        <ul class="navbar-nav mr-auto">
-            <li class="nav-item">
-                <a class="nav-link" href="/">Homepage</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/addProduct">Add Product</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/editProducts">Edit Products</a>
-            </li>
-            <li class="nav-item active">
-                <a class="nav-link" href="/attributes">Attributes List</a>
-            </li>
-        </ul>
-    </div>
-</nav>
+<?php
+require_once "Menu.php";
+?>
 <div class="container my-5">
     <h1 class="text-center my-5">Attributes</h1>
     <?php
@@ -31,7 +16,8 @@
         <?php
         $attributeValues = $attributeValueRepository->getAttributesValue('parent', $attributeName->getId());
         foreach ($attributeValues as $attributeValue): ?>
-            <span class="ml-5"><strong>ID(<?= $attributeValue->getId(); ?>)</strong><?= $attributeValue->getValue(); ?></span>
+            <span class="ml-5"><strong>ID(<?= $attributeValue->getId(); ?>)</strong><?= $attributeValue->getValue(); ?>
+            </span>
         <?php
         endforeach;
     endforeach;

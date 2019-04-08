@@ -1,40 +1,29 @@
 <?php require_once "Header.php"; ?>
-    <title>Product</title>
+<title>Product</title>
 </head>
 <body>
-<nav class="navbar navbar-expand-md navbar-dark bg-dark">
-    <div class="collapse navbar-collapse" id="navbarCollapse">
-        <ul class="navbar-nav mr-auto">
-            <li class="nav-item">
-                <a class="nav-link" href="/">Homepage</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/addProduct">Add Product</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/editProducts">Edit Products</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/attributes">Attributes List</a>
-            </li>
-        </ul>
-    </div>
-</nav>
+<?php
+require_once "Menu.php";
+?>
 <div class="container my-5">
     <?php
     $productRepository = new \App\Repository\ProductRepository();
-    $product = $productRepository->getProducts("id", $_GET['id'])[0];
+    $product = $productRepository->getProducts(null, null, "id", $_GET['id'])[0];
     $attributes = $product->getAttributes();
     ?>
-    <h1 class="text-success my-5 text-center"> <?= $product->getName(); ?> <small class="text-danger"><?= $product->getPrice(); ?>$</small></h1>
+    <h1 class="text-success mt-4 mb-3 text-center"> <?= $product->getName(); ?></h1>
+    <h3 class="text-danger text-center"><?= $product->getPrice(); ?>$</h3>
     <div class="row">
-        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mx-auto">
+            <img style="width: 100%; margin-bottom: 2rem;" src="https://via.placeholder.com/400x250" alt="Here should be an image =(">
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mx-auto">
             <p style="font-size: 20px;"><?= $product->getDescription(); ?></p>
             <h2>Specifications:</h2>
             <?php
             foreach ($attributes as $attribute) {
                 if (!empty($attribute)) {
-                    echo $attribute->getName() . ": " . $attribute->getValue() . "<br>";
+                    echo '<strong>' . $attribute->getName() . ':</strong> ' . $attribute->getValue() . "<br>";
                 }
             }
             ?>

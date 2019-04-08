@@ -18,7 +18,6 @@ class ProductRepository
         $this->db = DataBase::getDb();
     }
 
-
     /**
      * @param Product $product
      * @return bool|int
@@ -26,41 +25,65 @@ class ProductRepository
      */
     public function create(Product $product)
     {
-        $values = array('name' => $product->getName(), 'description' => $product->getDescription(), 'price' => $product->getPrice(), 'attributes' => $product->getAttributesAsString());
+        $values = array(
+            'name' => $product->getName(),
+            'description' => $product->getDescription(),
+            'price' => $product->getPrice(),
+            'attributes' => $product->getAttributesAsString()
+        );
         $query = $this->db->insertInto('products')->values($values);
         return $query->execute();
     }
 
     /**
+     * @param $pageSize
+     * @param $page
      * @param null $condition
      * @param null $parameters
      * @return array
      * @throws \Envms\FluentPDO\Exception
      */
-    public function getProducts($condition = null, $parameters = null)
+    public function getProducts($page, $pageSize, $condition = null, $parameters = null)
     {
-        $this->find($condition, $parameters);
+        if ($condition === 'id' && $parameters !== null) {
+            $this->products = $this->db
+                ->from('products')
+                ->select('*')
+                ->where($condition, $parameters);
+        } elseif ($condition !== null && $parameters !== null) {
+            $this->products = $this->db
+                ->from('products')
+                ->select('*')
+                ->where($condition, $parameters)
+                ->limit($pageSize)
+                ->offset(($page - 1) * $pageSize);
+        } else {
+            $this->products = $this->db
+                ->from('products')
+                ->select('*')
+                ->limit($pageSize)
+                ->offset(($page - 1) * $pageSize);
+        }
         $productsList = [];
         foreach ($this->products as $product) {
             $attributes = Product::attributesToArray($product['attributes']);
-            $productsList[] = new Product($product['name'], $product['description'], $product['price'], $attributes, $product['id']);
+            $productsList[] = new Product(
+                $product['name'],
+                $product['description'],
+                $product['price'],
+                $attributes,
+                $product['id']
+            );
         }
         return $productsList;
     }
 
-    /**
-     * @param null $condition
-     * @param null $parameters
-     * @throws \Envms\FluentPDO\Exception
-     */
-    private function find($condition = null, $parameters = null)
+    public function getCount()
     {
-        if ($condition !== null && $parameters !== null) {
-            $result = $this->db->from('products')->select('*')->where($condition, $parameters);
-        } else {
-            $result = $this->db->from('products')->select('*');
+        foreach ($this->db->from('products')->select(null)->select('COUNT(*)')->fetch() as $item) {
+            return $item;
         }
-        $this->products = $result;
+        return 0;
     }
 
     /**
@@ -70,7 +93,12 @@ class ProductRepository
      */
     public function update(Product $product)
     {
-        $values = array('name' => $product->getName(), 'description' => $product->getDescription(), 'price' => $product->getPrice(), 'attributes' => $product->getAttributesAsString());
+        $values = array(
+            'name' => $product->getName(),
+            'description' => $product->getDescription(),
+            'price' => $product->getPrice(),
+            'attributes' => $product->getAttributesAsString()
+        );
         return $this->db->update('products')->set($values)->where('id', $product->getId())->execute();
     }
 

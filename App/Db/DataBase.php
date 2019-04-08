@@ -1,8 +1,6 @@
 <?php
 
-
 namespace App\Db;
-
 
 use PDO;
 
@@ -21,10 +19,8 @@ class DataBase
 
     public static function getDb()
     {
-        if (self::$fdb === null)
-        {
-            if (self::$db === null)
-            {
+        if (self::$fdb === null) {
+            if (self::$db === null) {
                 self::$db = new PDO('sqlite:database.db');
             }
             self::$fdb = new \Envms\FluentPDO\Query(self::$db);
