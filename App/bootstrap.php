@@ -10,7 +10,9 @@ use \App\Controllers\AttributesController;
 use \App\Controllers\MainController;
 use \App\Controllers\ProductController;
 
-
+/**
+ * Defines existing paths and include the necessary controllers.
+ */
 $dispatcher = FastRoute\simpleDispatcher(function (FastRoute\RouteCollector $r) {
     $r->addRoute('GET', '/addProduct', new AddProductController);
     $r->addRoute('POST', '/addProduct', new AddProductController);
@@ -21,11 +23,9 @@ $dispatcher = FastRoute\simpleDispatcher(function (FastRoute\RouteCollector $r) 
     $r->addRoute('GET', '/', new MainController);
 });
 
-// Fetch method and URI from somewhere
 $httpMethod = $_SERVER['REQUEST_METHOD'];
 $uri = $_SERVER['REQUEST_URI'];
 
-// Strip query string (?foo=bar) and decode URI
 if (false !== $pos = strpos($uri, '?')) {
     $uri = substr($uri, 0, $pos);
 }
@@ -51,6 +51,3 @@ switch ($routeInfo[0]) {
         $handler->__invoke();
         break;
 }
-
-$db = DataBase::getDb();
-$productRepository = new ProductRepository();

@@ -5,6 +5,11 @@ namespace App\Repository;
 use App\Db\DataBase;
 use App\Entity\AttributeName;
 
+/**
+ * AttributeNameRepository class provides functionality to
+ * AttributeName Entity for working with a database
+ * @package App\Repository
+ */
 class AttributeNameRepository
 {
     private $db;
@@ -16,6 +21,7 @@ class AttributeNameRepository
     }
 
     /**
+     * Function for getting Attribute Names by condition
      * @param null $condition
      * @param null $parameters
      * @return array

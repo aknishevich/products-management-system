@@ -5,6 +5,11 @@ namespace App\Repository;
 use App\Db\DataBase;
 use App\Entity\AttributeValue;
 
+/**
+ * AttributeValueRepository class provides functionality to
+ * AttributeValue Entity for working with a database
+ * @package App\Repository
+ */
 class AttributeValueRepository
 {
     private $db;
@@ -15,6 +20,13 @@ class AttributeValueRepository
         $this->db = DataBase::getDb();
     }
 
+    /**
+     * Function for getting Attributes Values by condition
+     * @param null $condition
+     * @param null $parameter
+     * @return AttributeValue|array
+     * @throws \Envms\FluentPDO\Exception
+     */
     public function getAttributesValue($condition = null, $parameter = null)
     {
         $result = [];

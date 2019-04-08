@@ -16,12 +16,11 @@ require_once "Menu.php";
         foreach ($products as $product):
             ?>
 
-            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 my-3">
                 <a href="/product?id=<?= $product->getId(); ?>">
                     <h4><?= $product->getName(); ?></h4>
                     <img style="width: 100%;" src="https://via.placeholder.com/200x150"
                          alt="Here should be an image =(">
-                    <small>Here should have been an image = (</small>
                 </a>
             </div>
 

@@ -4,6 +4,10 @@ namespace App\Entity;
 
 use App\Repository\AttributeValueRepository;
 
+/**
+ * Product Entity
+ * @package App\Entity
+ */
 class Product
 {
     private $id;
@@ -29,6 +33,10 @@ class Product
         $this->attributes = $attributes;
     }
 
+    /**
+     * @param string $attributes
+     * @return array
+     */
     public static function attributesToArray($attributes = '')
     {
         $result = [];
@@ -42,6 +50,11 @@ class Product
         return $result;
     }
 
+    /**
+     * Function for get product's attributes
+     * as string separated by commas.
+     * @return string
+     */
     public function getAttributesAsString()
     {
         $result = "";
@@ -49,9 +62,13 @@ class Product
             $attributesCount = count($this->attributes);
             for ($i = 0; $i < $attributesCount; $i++) {
                 if ($i + 1 === $attributesCount) {
-                    $result .= $this->attributes[$i]->getId();
+                    if(method_exists($this->attributes[$i], 'getId')) {
+                        $result .= $this->attributes[$i]->getId();
+                    }
                 } else {
-                    $result .= $this->attributes[$i]->getId() . ',';
+                    if(method_exists($this->attributes[$i], 'getId')) {
+                        $result .= $this->attributes[$i]->getId() . ',';
+                    }
                 }
             }
         }

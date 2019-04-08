@@ -2,6 +2,10 @@
 
 namespace App\Entity;
 
+/**
+ * AttributeName Entity
+ * @package App\Entity
+ */
 class AttributeName
 {
     private $id;

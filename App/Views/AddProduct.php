@@ -13,19 +13,18 @@ require_once "Menu.php";
         <div class="form-group">
             <label for="productName">Product Name</label>
             <input required type="text" class="form-control" id="productName" name="productName"
-                   value="<?= isset($_POST['productName']) ? $_POST['productName'] : '' ?>" placeholder="Product name">
+                   value="<?= isset($_POST['productName']) ? $_POST['productName'] : '' ?>">
         </div>
         <div class="form-group">
             <label for="productDescription">Product description</label>
-            <input required type="text" class="form-control" id="productDescription" name="productDescription"
-                   value="<?= isset($_POST['productDescription']) ? $_POST['productDescription'] : '' ?>"
-                   placeholder="Product description">
+            <textarea required type="text" class="form-control" id="productDescription"
+                      name="productDescription"><?= isset($_POST['productDescription']) ?
+                                                          $_POST['productDescription'] : '' ?></textarea>
         </div>
         <div class="form-group">
             <label for="productPrice">Product price</label>
             <input required type="text" class="form-control" id="productPrice" name="productPrice"
-                   value="<?= isset($_POST['productPrice']) ? $_POST['productPrice'] : '' ?>"
-                   placeholder="Product price">
+                   value="<?= isset($_POST['productPrice']) ? $_POST['productPrice'] : '' ?>">
         </div>
         <div class="form-group">
             <label for="productAttributes">Product attributes
@@ -33,10 +32,9 @@ require_once "Menu.php";
             </label>
             <input type="text" class="form-control" id="productAttributes" name="productAttributes"
                    name="productAttributes"
-                   value="<?= isset($_POST['productAttributes']) ? $_POST['productAttributes'] : '' ?>"
-                   placeholder="1,5,7">
+                   value="<?= isset($_POST['productAttributes']) ? $_POST['productAttributes'] : '' ?>">
             <small>Use IDs from Attributes ID list on <a href="/attributes">Attributes page</a>
-                separated by commas.</small>
+                separated by commas. For example: "1,7,10,14"</small>
         </div>
         <input type="submit" name="productAdd" class="btn btn-sm btn-success" value="Add new Product">
     </form>

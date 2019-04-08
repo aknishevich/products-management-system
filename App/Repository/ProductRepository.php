@@ -5,12 +5,14 @@ namespace App\Repository;
 use App\Db\DataBase;
 use App\Entity\Product;
 
+/**
+ * ProductRepository class provides functionality to
+ * Product Entity for working with a database
+ * @package App\Repository
+ */
 class ProductRepository
 {
     private $products;
-    /**
-     * @var \Envms\FluentPDO\Query
-     */
     private $db;
 
     public function __construct()
@@ -36,6 +38,9 @@ class ProductRepository
     }
 
     /**
+     * Get products from database by page number & page size
+     * (optional, for pagination) or by condition
+     * (id, for example)
      * @param $pageSize
      * @param $page
      * @param null $condition
@@ -45,6 +50,9 @@ class ProductRepository
      */
     public function getProducts($page, $pageSize, $condition = null, $parameters = null)
     {
+        /**
+         * Condition to determine if pagination is necessary
+         */
         if ($condition === 'id' && $parameters !== null) {
             $this->products = $this->db
                 ->from('products')
@@ -78,6 +86,11 @@ class ProductRepository
         return $productsList;
     }
 
+    /**
+     * Get count of products (for pagination)
+     * @return int
+     * @throws \Envms\FluentPDO\Exception
+     */
     public function getCount()
     {
         foreach ($this->db->from('products')->select(null)->select('COUNT(*)')->fetch() as $item) {
@@ -87,6 +100,7 @@ class ProductRepository
     }
 
     /**
+     * Update product in database
      * @param Product $product
      * @return bool|int|\PDOStatement
      * @throws \Envms\FluentPDO\Exception
@@ -103,6 +117,7 @@ class ProductRepository
     }
 
     /**
+     * Delete product from database
      * @param int $id
      * @return bool
      * @throws \Envms\FluentPDO\Exception

@@ -25,7 +25,7 @@ $rangeFrom = $curPage * $pLength - $pLength;
 <nav class="mt-4">
     <ul class="pagination justify-content-center">
         <li class="page-item <?php if ($curPage == 1) echo "disabled" ?>">
-            <a class="page-link" href="/?pageId=1">Start</a>
+            <a class="page-link" href="?pageId=1">Start</a>
         </li>
         <?php
         if ($curPage * $pLength - $pLength - 1 < $pCount && $curPage * $pLength - $pLength - 1 > 0) {
